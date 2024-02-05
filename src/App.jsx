@@ -1,4 +1,4 @@
-import Message from "./Message"
+import Message from "./components/Message"
 
 function App() {
   const messages = [{
@@ -15,7 +15,7 @@ function App() {
     pfpUrl: "https://lh3.googleusercontent.com/ogw/ANLem4bi7UFPAOsFd_YAIfyUcTRGCWCw2h2qGS0X2u9R=s64-c-mo"
   }, {
     id: "lkjh7-asdfůflh75ksagHf",
-    sentBy: "User",
+    sentBy: "honzoraptor",
     timestamp: 1707133384022,
     text: "Da text of da fucking message bro. Problem??",
     pfpUrl: "https://lh3.googleusercontent.com/ogw/ANLem4bi7UFPAOsFd_YAIfyUcTRGCWCw2h2qGS0X2u9R=s64-c-mo"
@@ -27,7 +27,7 @@ function App() {
     pfpUrl: "https://lh3.googleusercontent.com/ogw/ANLem4bi7UFPAOsFd_YAIfyUcTRGCWCw2h2qGS0X2u9R=s64-c-mo"
   }, {
     id: "XYZfUklh7Zusaahf-lkjh7",
-    sentBy: "User",
+    sentBy: "honzoraptor",
     timestamp: 1707133384022,
     text: "Da text of da fucking message bro. Problem??",
     pfpUrl: "https://lh3.googleusercontent.com/ogw/ANLem4bi7UFPAOsFd_YAIfyUcTRGCWCw2h2qGS0X2u9R=s64-c-mo"

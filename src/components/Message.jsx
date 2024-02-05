@@ -1,6 +1,7 @@
 function Message({ sentBy, timestamp, text, pfpUrl }) {
+  const username = "honzoraptor"
   return (
-    <div className="message">
+    <div className={`message message-${sentBy === username ? "me" : "someone"}`}>
       <div className="message-top">
         <img src={pfpUrl} />
         <p className="message-username">{sentBy}</p>
