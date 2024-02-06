@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import { supabase } from "../supabaseClient"
 import Message from "./Message"
 import Nav from "./Nav"
 
@@ -50,9 +51,19 @@ function Chat() {
     document.getElementById(Math.max(...msgTimestamps)).scrollIntoView()
   }
 
+  async function getData() {
+    const { data, error } = await supabase
+      .from('messages')
+      .select()
+    console.log(data)
+    console.log(error)
+  }
+
   useEffect(() => {
     scrollToBottom()
+    getData()
   }, [])
+
   return (
     <>
       <Nav />
