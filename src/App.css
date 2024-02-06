@@ -1,6 +1,8 @@
 :root {
   --acc1: #5A4650;
   --acc2: #7D5046;
+  --main-white-bg: rgb(230, 230, 230);
+  --poop-outline-width: 3;
 }
 
 * {
@@ -10,26 +12,27 @@
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-#root {
-  min-height: 100svh;
-  background: rgb(230, 230, 230);
+.container {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
 }
 
 @media (max-width:600px) {
+  #root {
+    justify-content: space-evenly;
+  }
+
   .chat {
     display: flex;
     flex-direction: column;
-    margin: 8px 8px 0 8px;
-    max-height: 90svh;
+    margin-inline: 6px;
+    max-height: 97svh;
   }
 
   .messages-wrp {
     background: rgb(240, 240, 240);
-    padding-inline: 25px;
-    border-radius: 28px;
+    padding-inline: 15px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.709);
   }
 
@@ -111,6 +114,14 @@
   .chat-ctrls button:hover {
     filter: contrast(5);
   }
+
+  .poop-bg {
+    display: none;
+  }
+
+  #desktop {
+    display: none;
+  }
 }
 
 @media (min-width: 601px) {
@@ -118,13 +129,12 @@
     display: flex;
     flex-direction: column;
     max-width: 70%;
-    max-height: 90svh;
+    max-height: 80vh;
   }
 
   .messages-wrp {
     padding-inline: 30px;
-    border-radius: 28px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.123);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.709);
     background: rgb(240, 240, 240);
   }
 
@@ -206,6 +216,55 @@
   .chat-ctrls button:hover {
     filter: contrast(5);
   }
+
+  .poop-bg {
+    max-height: 70px;
+    width: auto;
+  }
+
+  #desktop {
+    margin-inline: auto;
+    padding: 15px;
+    width: 90%;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.709);
+    border-radius: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo-text {
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.623);
+    font-weight: 900;
+    letter-spacing: -1px;
+    font-size: 1.3rem;
+    position: relative;
+    transition: .4s;
+  }
+
+  .logo-text:hover {
+    color: var(--acc2);
+  }
+
+  .user-info {
+    display: grid;
+  }
+
+  .pfp {
+    max-height: 38px;
+    border-radius: 50%;
+    width: auto;
+  }
+
+  .theme-indicator {
+    font-size: .8rem;
+    color: #5A4650;
+  }
+}
+
+.chat {
+  z-index: 10;
 }
 
 .messages-wrp {
@@ -220,3 +279,131 @@
 .chat-ctrls input:hover::placeholder {
   color: var(--acc1);
 }
+
+.no-select {
+  user-select: none;
+  -webkit-user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+#root {
+  min-height: 100svh;
+  background: var(--main-white-bg);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+/* Checkbox styling (mostly not made by me) */
+.checkbox-wrapper-7 .tgl {
+  display: none;
+}
+
+.checkbox-wrapper-7 .tgl,
+.checkbox-wrapper-7 .tgl:after,
+.checkbox-wrapper-7 .tgl:before,
+.checkbox-wrapper-7 .tgl *,
+.checkbox-wrapper-7 .tgl *:after,
+.checkbox-wrapper-7 .tgl *:before,
+.checkbox-wrapper-7 .tgl+.tgl-btn {
+  box-sizing: border-box;
+}
+
+.checkbox-wrapper-7 .tgl::-moz-selection,
+.checkbox-wrapper-7 .tgl:after::-moz-selection,
+.checkbox-wrapper-7 .tgl:before::-moz-selection,
+.checkbox-wrapper-7 .tgl *::-moz-selection,
+.checkbox-wrapper-7 .tgl *:after::-moz-selection,
+.checkbox-wrapper-7 .tgl *:before::-moz-selection,
+.checkbox-wrapper-7 .tgl+.tgl-btn::-moz-selection,
+.checkbox-wrapper-7 .tgl::selection,
+.checkbox-wrapper-7 .tgl:after::selection,
+.checkbox-wrapper-7 .tgl:before::selection,
+.checkbox-wrapper-7 .tgl *::selection,
+.checkbox-wrapper-7 .tgl *:after::selection,
+.checkbox-wrapper-7 .tgl *:before::selection,
+.checkbox-wrapper-7 .tgl+.tgl-btn::selection {
+  background: none;
+}
+
+.checkbox-wrapper-7 .tgl+.tgl-btn {
+  outline: 0;
+  display: block;
+  width: 4em;
+  height: 2em;
+  position: relative;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.checkbox-wrapper-7 .tgl+.tgl-btn:after,
+.checkbox-wrapper-7 .tgl+.tgl-btn:before {
+  position: relative;
+  display: block;
+  content: "";
+  width: 50%;
+  height: 100%;
+}
+
+.checkbox-wrapper-7 .tgl+.tgl-btn:after {
+  left: 0;
+}
+
+.checkbox-wrapper-7 .tgl+.tgl-btn:before {
+  display: none;
+}
+
+.checkbox-wrapper-7 .tgl:checked+.tgl-btn:after {
+  left: 50%;
+  background: #fbfbfb;
+}
+
+.checkbox-wrapper-7 .tgl-ios+.tgl-btn {
+  background: #fbfbfb;
+  border-radius: 2em;
+  padding: 2px;
+  transition: all 0.4s ease;
+  border: 1px solid #e8eae9;
+  box-shadow: 0 7px 20px rgba(0, 0, 0, 0.709);
+  margin-inline: auto;
+}
+
+.checkbox-wrapper-7 .tgl-ios+.tgl-btn:after {
+  border-radius: 2em;
+  background: var(--acc1);
+  transition: left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), padding 0.3s ease, margin 0.3s ease;
+  box-shadow: 0 0px 7px rgba(0, 0, 0, 0.257);
+}
+
+.checkbox-wrapper-7 .tgl-ios+.tgl-btn:hover:after {
+  will-change: padding;
+}
+
+.checkbox-wrapper-7 .tgl-ios+.tgl-btn:active {
+  box-shadow: inset 0 0 0 2em #e8eae9;
+}
+
+.checkbox-wrapper-7 .tgl-ios+.tgl-btn:active:after {
+  padding-right: 0.8em;
+}
+
+.checkbox-wrapper-7 .tgl-ios:checked+.tgl-btn {
+  background: var(--acc2);
+}
+
+.checkbox-wrapper-7 .tgl-ios:checked+.tgl-btn:active {
+  box-shadow: none;
+}
+
+.checkbox-wrapper-7 .tgl-ios:checked+.tgl-btn:active:after {
+  margin-left: -0.8em;
+}
+
+/* Checkbox styling ends here */
