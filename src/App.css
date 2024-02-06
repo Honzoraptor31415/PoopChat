@@ -15,6 +15,7 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  width: 100%;
 }
 
 @media (max-width:600px) {
@@ -26,12 +27,14 @@
     display: flex;
     flex-direction: column;
     margin-inline: 6px;
-    max-height: 97svh;
+    height: 97svh;
+    width: 90%;
   }
 
   .messages-wrp {
     background: rgb(40, 40, 40);
     padding-inline: 15px;
+    height: 100%;
   }
 
   .message-someone {
@@ -71,6 +74,7 @@
 
   .message-text {
     line-height: 1.4;
+    word-wrap: break-word;
   }
 
   .chat-ctrls {
@@ -142,13 +146,13 @@
   .chat {
     display: flex;
     flex-direction: column;
-    max-width: 70%;
-    max-height: 80vh;
+    width: 70%;
   }
 
   .messages-wrp {
     padding-inline: 30px;
     background: rgb(40, 40, 40);
+    max-height: 72vh;
   }
 
   .message-someone {
@@ -456,4 +460,8 @@
 
 .google-signin:hover {
   border-color: rgb(157, 157, 157);
+}
+
+.message-text {
+  word-wrap: break-word;
 }
