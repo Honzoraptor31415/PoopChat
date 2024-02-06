@@ -6,6 +6,7 @@ import Nav from "./Nav"
 function Chat() {
   const inputPlaceholders = ["Feel free to start typing", "You can type here", "Write your message", "Your message goes here!", "May you pls start typing?", "Write something", "Bing chilling", "Start typing..."]
   const [message, setMessage] = useState("")
+  const [user, setUser] = useState()
 
   const messages = [{
     id: "lkjh7-asHDIklh7bksaghf",
@@ -21,7 +22,7 @@ function Chat() {
     pfpUrl: "https://yt3.googleusercontent.com/TAXLCd3uFynuEQAcbyCZkBqzhDEqR1M0eHM0PTjMuJeUzKwUIhqlApDr6ZEe5Zk4yo1oXZZeFg=s176-c-k-c0x00ffffff-no-rj"
   }, {
     id: "lkjh7-asdfůflh75ksagHf",
-    sentBy: "honzoraptor",
+    sentBy: "Honzo Raptor (Honzoraptor 3.1415)",
     timestamp: 1707206393972,
     text: "it is not a particularly stupid to get into the play-offs were a large number of people who could be considered to have been caught out by the scottish office and the scottish sports council's `scottish devolution, which had been in the first world war, when the brothers receive complementary functions of the catholic population week.",
     pfpUrl: "https://lh3.googleusercontent.com/ogw/ANLem4bi7UFPAOsFd_YAIfyUcTRGCWCw2h2qGS0X2u9R=s64-c-mo"
@@ -33,14 +34,14 @@ function Chat() {
     pfpUrl: "https://yt3.googleusercontent.com/TAXLCd3uFynuEQAcbyCZkBqzhDEqR1M0eHM0PTjMuJeUzKwUIhqlApDr6ZEe5Zk4yo1oXZZeFg=s176-c-k-c0x00ffffff-no-rj"
   }, {
     id: "XYZfUklh7Zusaahf-lkjh7",
-    sentBy: "honzoraptor",
+    sentBy: "Honzo Raptor (Honzoraptor 3.1415)",
     timestamp: 1707206431797,
     text: "in the latter part of the nineteenth century, the most important medium for the contras behind this restriction is not to be confused with his head bowed in the volume of exports to the ec budget and made the most of the opportunities that are available to us as a race to remember that in the event of the borrower the hall effect it would have on the city.'",
     pfpUrl: "https://lh3.googleusercontent.com/ogw/ANLem4bi7UFPAOsFd_YAIfyUcTRGCWCw2h2qGS0X2u9R=s64-c-mo"
   }]
 
-  function submit(msg) {
-    console.log(`Message "${msg}" was sent.`)
+  function submit() {
+    console.log(`Message "${message}" was sent.`)
   }
 
   function scrollToBottom() {
@@ -59,9 +60,16 @@ function Chat() {
     console.log(error)
   }
 
+  async function getUser() {
+    const { data: { user } } = await supabase.auth.getUser()
+    setUser(user)
+    console.log(user.user_metadata.avatar_url)
+  }
+
   useEffect(() => {
     scrollToBottom()
     getData()
+    getUser()
   }, [])
 
   return (
@@ -82,11 +90,11 @@ function Chat() {
           <div className="chat-ctrls">
             <div className="input-wrp">
               <div className="input-pfp-btn">
-                <img className="input-pfp-img" src="https://lh3.googleusercontent.com/ogw/ANLem4bi7UFPAOsFd_YAIfyUcTRGCWCw2h2qGS0X2u9R=s64-c-mo" />
+                <img className="input-pfp-img" src={user ? user.user_metadata.avatar_url : ""} />
               </div>
               <input id="message-input" placeholder={inputPlaceholders[Math.floor(Math.random() * inputPlaceholders.length)]} type="text" onChange={(e) => { setMessage(e.target.value) }} value={message} />
             </div>
-            <button onClick={() => { submit(message) }}>Submit</button>
+            <button onClick={() => { submit() }}>Submit</button>
           </div>
         </div>
         <svg className="no-select poop-bg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
