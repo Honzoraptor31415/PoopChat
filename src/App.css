@@ -1,7 +1,6 @@
 :root {
   --acc1: #5A4650;
   --acc2: #7D5046;
-  --main-white-bg: rgb(230, 230, 230);
   --poop-outline-width: 3;
 }
 
@@ -44,7 +43,6 @@
     background: linear-gradient(20deg, var(--acc1), var(--acc2));
     margin-left: 20px;
     color: white;
-    font-weight: 500;
   }
 
   .message {
@@ -86,10 +84,8 @@
   .chat-ctrls input {
     color: white;
     background: transparent;
-    border: none;
     width: 100%;
-    border: 1px var(--acc1) solid;
-    border-radius: 14px 0 0 14px;
+    border: none;
     padding: 10px;
     font-size: 1rem;
     outline: none;
@@ -101,15 +97,15 @@
     background: linear-gradient(45deg, var(--acc1), var(--acc2));
     color: white;
     font-weight: 600;
-    padding: 7px 20px;
+    padding: 0 12px;
     border-radius: 0 14px 14px 0;
-    font-size: 1rem;
+    font-size: .9rem;
     cursor: pointer;
     transition: .3s;
   }
 
   .chat-ctrls button:hover {
-    filter: contrast(5);
+    filter: contrast(3);
   }
 
   .poop-bg {
@@ -118,6 +114,27 @@
 
   #desktop {
     display: none;
+  }
+
+  .input-pfp-btn {
+    border: none;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    margin-inline: 7px;
+  }
+
+  .input-pfp-img {
+    max-height: 2rem;
+    border-radius: 50%;
+    width: auto;
+  }
+
+  .input-wrp {
+    width: 100%;
+    border: 1px var(--acc1) solid;
+    border-radius: 14px 0 0 14px;
+    display: flex;
   }
 }
 
@@ -143,7 +160,6 @@
     background: linear-gradient(20deg, var(--acc1), var(--acc2));
     margin-left: 20px;
     color: white;
-    font-weight: 500;
   }
 
   .message {
@@ -185,10 +201,8 @@
   .chat-ctrls input {
     color: white;
     background: transparent;
-    border: none;
     width: 100%;
-    border: 1px var(--acc1) solid;
-    border-radius: 14px 0 0 14px;
+    border: none;
     padding: 10px;
     font-size: 1rem;
     outline: none;
@@ -208,7 +222,7 @@
   }
 
   .chat-ctrls button:hover {
-    filter: contrast(5);
+    filter: contrast(3);
   }
 
   .poop-bg {
@@ -250,6 +264,27 @@
     max-height: 38px;
     border-radius: 50%;
     width: auto;
+  }
+
+  .input-pfp-btn {
+    border: none;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    margin-inline: 7px;
+  }
+
+  .input-pfp-img {
+    max-height: 2rem;
+    border-radius: 50%;
+    width: auto;
+  }
+
+  .input-wrp {
+    width: 100%;
+    border: 1px var(--acc1) solid;
+    border-radius: 14px 0 0 14px;
+    display: flex;
   }
 }
 
@@ -395,3 +430,30 @@
 }
 
 /* Checkbox styling ends here */
+
+.log-in-please {
+  color: white;
+  font-size: 1.2rem;
+  max-width: 90%;
+  text-align: center;
+}
+
+.google-signin {
+  background: rgb(40, 40, 40);
+  border: none;
+  border-radius: 28px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px rgb(40, 40, 40) solid;
+  color: white;
+  display: flex;
+  padding: 15px 20px;
+  font-size: 1rem;
+  gap: 10px;
+  align-items: center;
+  transition: .4s;
+}
+
+.google-signin:hover {
+  border-color: rgb(157, 157, 157);
+}

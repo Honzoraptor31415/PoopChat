@@ -11,13 +11,13 @@ function Chat() {
     sentBy: "User",
     timestamp: 1707133384022,
     text: "that's it.",
-    pfpUrl: "https://lh3.googleusercontent.com/ogw/ANLem4bi7UFPAOsFd_YAIfyUcTRGCWCw2h2qGS0X2u9R=s64-c-mo"
+    pfpUrl: "https://yt3.googleusercontent.com/TAXLCd3uFynuEQAcbyCZkBqzhDEqR1M0eHM0PTjMuJeUzKwUIhqlApDr6ZEe5Zk4yo1oXZZeFg=s176-c-k-c0x00ffffff-no-rj"
   }, {
     id: "lkjh7-asdfůklh7bksaghf",
     sentBy: "User",
     timestamp: 1707206380588,
     text: "the village has a considerable influence on the design of the course is the same as any other party.",
-    pfpUrl: "https://lh3.googleusercontent.com/ogw/ANLem4bi7UFPAOsFd_YAIfyUcTRGCWCw2h2qGS0X2u9R=s64-c-mo"
+    pfpUrl: "https://yt3.googleusercontent.com/TAXLCd3uFynuEQAcbyCZkBqzhDEqR1M0eHM0PTjMuJeUzKwUIhqlApDr6ZEe5Zk4yo1oXZZeFg=s176-c-k-c0x00ffffff-no-rj"
   }, {
     id: "lkjh7-asdfůflh75ksagHf",
     sentBy: "honzoraptor",
@@ -29,7 +29,7 @@ function Chat() {
     sentBy: "User",
     timestamp: 1707206422459,
     text: "he would be the last thing on his mind.",
-    pfpUrl: "https://lh3.googleusercontent.com/ogw/ANLem4bi7UFPAOsFd_YAIfyUcTRGCWCw2h2qGS0X2u9R=s64-c-mo"
+    pfpUrl: "https://yt3.googleusercontent.com/TAXLCd3uFynuEQAcbyCZkBqzhDEqR1M0eHM0PTjMuJeUzKwUIhqlApDr6ZEe5Zk4yo1oXZZeFg=s176-c-k-c0x00ffffff-no-rj"
   }, {
     id: "XYZfUklh7Zusaahf-lkjh7",
     sentBy: "honzoraptor",
@@ -69,7 +69,12 @@ function Chat() {
             })}
           </div>
           <div className="chat-ctrls">
-            <input id="message-input" placeholder={inputPlaceholders[Math.floor(Math.random() * inputPlaceholders.length)]} type="text" onChange={(e) => { setMessage(e.target.value) }} value={message} />
+            <div className="input-wrp">
+              <div className="input-pfp-btn">
+                <img className="input-pfp-img" src="https://lh3.googleusercontent.com/ogw/ANLem4bi7UFPAOsFd_YAIfyUcTRGCWCw2h2qGS0X2u9R=s64-c-mo" />
+              </div>
+              <input id="message-input" placeholder={inputPlaceholders[Math.floor(Math.random() * inputPlaceholders.length)]} type="text" onChange={(e) => { setMessage(e.target.value) }} value={message} />
+            </div>
             <button onClick={() => { submit(message) }}>Submit</button>
           </div>
         </div>
