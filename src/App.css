@@ -39,19 +39,19 @@
 
   .message-someone {
     background: white;
-    margin-right: 20px;
+    margin-right: 10px;
   }
 
   .message-me {
     background: linear-gradient(20deg, var(--acc1), var(--acc2));
-    margin-left: 20px;
+    margin-left: 10px;
     color: white;
   }
 
   .message {
     margin-block: 19px;
     border-radius: 14px;
-    padding: 15px;
+    padding: 8px;
   }
 
   .message-top {
@@ -70,6 +70,7 @@
   .message-username {
     opacity: 0.9;
     font-weight: 500;
+    font-size: .9rem;
   }
 
   .message-text {
@@ -83,17 +84,6 @@
     border-radius: 14px;
     display: flex;
     justify-content: center;
-  }
-
-  .chat-ctrls input {
-    color: white;
-    background: transparent;
-    width: 100%;
-    border: none;
-    padding: 10px;
-    font-size: 1rem;
-    outline: none;
-    transition: .2s;
   }
 
   .chat-ctrls button {
@@ -152,7 +142,7 @@
   .messages-wrp {
     padding-inline: 30px;
     background: rgb(40, 40, 40);
-    max-height: 72vh;
+    height: 72vh;
   }
 
   .message-someone {
@@ -200,17 +190,6 @@
     border-radius: 14px;
     display: flex;
     justify-content: center;
-  }
-
-  .chat-ctrls input {
-    color: white;
-    background: transparent;
-    width: 100%;
-    border: none;
-    padding: 10px;
-    font-size: 1rem;
-    outline: none;
-    transition: .2s;
   }
 
   .chat-ctrls button {
@@ -303,6 +282,10 @@
 
 .messages-wrp::-webkit-scrollbar {
   display: none;
+}
+
+.chat-ctrls input::placeholder {
+  font-size: .9rem;
 }
 
 .chat-ctrls input:hover::placeholder {
@@ -464,4 +447,30 @@
 
 .message-text {
   word-wrap: break-word;
+}
+
+.no-messages {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.no-messages-text {
+  color: grey;
+  font-size: 1.2rem;
+  max-width: 80%;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.chat-ctrls input {
+  color: white;
+  background: transparent;
+  width: 100%;
+  border: none;
+  padding: 10px 0;
+  font-size: 1rem;
+  outline: none;
+  transition: .2s;
 }

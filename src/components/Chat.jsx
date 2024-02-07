@@ -33,23 +33,26 @@ function Chat() {
 
   async function getData() {
     const res = await supabase.from('messages').select("*").gt("timestamp", new Date().getTime() - 36_000_000)
-    console.log(res.data)
     setMessages(res.data)
+    console.log(res.data)
     console.log(res.error)
   }
 
   async function getUser() {
     const { data: { user } } = await supabase.auth.getUser()
     setUser(user)
-    console.log(user)
   }
+
+  const handleInserts = (payload) => {
+    console.log('Change received!', payload.new)
+    setMessages((prevMessages) => [...prevMessages, payload.new])
+  }
+
+  supabase.channel('messages').on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages' }, handleInserts).subscribe()
 
   useEffect(() => {
     getData()
     getUser()
-    onload = () => {
-      console.log("loaded!!")
-    }
   }, [])
 
   return (
@@ -63,11 +66,19 @@ function Chat() {
           <div className="messages-wrp">
             {messages ? (
               <>
-                {messages.map(value => {
-                  return (
-                    <Message key={value.id} text={value.text} sentBy={value.sentBy} timestamp={value.timestamp} pfpUrl={value.pfpUrl} sentByEmail={value.sentByEmail} />
-                  )
-                })}
+                {messages.length > 0 ? (
+                  <>
+                    {messages.map(value => {
+                      return (
+                        <Message key={value.id} text={value.text} sentBy={value.sentBy} timestamp={value.timestamp} pfpUrl={value.pfpUrl} sentByEmail={value.sentByEmail} />
+                      )
+                    })}
+                  </>
+                ) : (
+                  <div className="no-messages">
+                    <p className="no-messages-text no-select">No messages were sent in the past 10 hours.</p>
+                  </div>
+                )}
               </>
             ) : ""}
           </div>
