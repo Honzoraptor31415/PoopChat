@@ -23,7 +23,6 @@ function Chat() {
           userid: user.id,
           timestamp: new Date().getTime()
         })
-      console.log(error)
     } else {
       setMeFadeAway()
       setMsgError("Message is tooooo long.")
@@ -47,8 +46,6 @@ function Chat() {
   async function getData() {
     const res = await supabase.from('messages').select("*").gt("timestamp", new Date().getTime() - 36_000_000)
     setMessages(res.data)
-    console.log(res.data)
-    console.log(res.error)
   }
 
   async function getUser() {
@@ -57,7 +54,6 @@ function Chat() {
   }
 
   const handleInserts = (payload) => {
-    console.log('Change received!', payload.new)
     setMessages((prevMessages) => [...prevMessages, payload.new])
   }
 
@@ -65,7 +61,6 @@ function Chat() {
 
   async function deleteOldMessages() {
     const { error } = await supabase.from('messages').delete().lt("timestamp", new Date().getTime() - 36_000_000)
-    console.log(error)
   }
 
   const checkEmptyMessage = msg => !msg.replace(/\s/g, '').length
@@ -101,15 +96,19 @@ function Chat() {
               </>
             ) : ""}
           </div>
-          <div className="chat-ctrls">
+          <form onSubmit={(e) => {
+            e.preventDefault()
+            send()
+            setMessage("")
+          }} className="chat-ctrls">
             <div className={`input-wrp ${checkEmptyMessage(message) ? "input-wrp-cant-send" : "input-wrp-can-send"}`}>
               <div className="input-pfp-btn">
                 <img className="input-pfp-img no-select" src={user ? user.user_metadata.avatar_url : ""} />
               </div>
               <input id="message-input" placeholder={inputPlaceholders[Math.floor(Math.random() * inputPlaceholders.length)]} type="text" onChange={(e) => { setMessage(e.target.value) }} value={message} />
             </div>
-            {checkEmptyMessage(message) ? "" : <button onClick={send}>Submit</button>}
-          </div>
+            {checkEmptyMessage(message) ? "" : <input type="submit" value={"Submit"} />}
+          </form>
         </div>
       </div>
     </>
