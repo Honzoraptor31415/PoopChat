@@ -19,10 +19,6 @@
 }
 
 @media (max-width:600px) {
-  #root {
-    justify-content: space-evenly;
-  }
-
   .chat {
     display: flex;
     flex-direction: column;
@@ -32,7 +28,6 @@
   }
 
   .messages-wrp {
-    background: rgb(40, 40, 40);
     padding-inline: 15px;
     height: 100%;
   }
@@ -49,20 +44,18 @@
   }
 
   .message {
-    margin-block: 19px;
-    border-radius: 14px;
     padding: 8px;
   }
 
   .message-top {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 10px;
     margin-bottom: 20px;
   }
 
   .message-top img {
-    max-height: 40px;
+    max-height: 25px;
     width: auto;
     border-radius: 50%;
   }
@@ -71,19 +64,6 @@
     opacity: 0.9;
     font-weight: 500;
     font-size: .9rem;
-  }
-
-  .message-text {
-    line-height: 1.4;
-    word-wrap: break-word;
-  }
-
-  .chat-ctrls {
-    background: rgb(40, 40, 40);
-    margin-top: 6px;
-    border-radius: 14px;
-    display: flex;
-    justify-content: center;
   }
 
   .chat-ctrls button {
@@ -98,37 +78,8 @@
     transition: .3s;
   }
 
-  .chat-ctrls button:hover {
-    filter: contrast(3);
-  }
-
-  .poop-bg {
-    display: none;
-  }
-
   #desktop {
     display: none;
-  }
-
-  .input-pfp-btn {
-    border: none;
-    background: transparent;
-    display: flex;
-    align-items: center;
-    margin-inline: 7px;
-  }
-
-  .input-pfp-img {
-    max-height: 2rem;
-    border-radius: 50%;
-    width: auto;
-  }
-
-  .input-wrp {
-    width: 100%;
-    border: 1px var(--acc1) solid;
-    border-radius: 14px 0 0 14px;
-    display: flex;
   }
 }
 
@@ -141,7 +92,6 @@
 
   .messages-wrp {
     padding-inline: 30px;
-    background: rgb(40, 40, 40);
     height: 72vh;
   }
 
@@ -157,8 +107,6 @@
   }
 
   .message {
-    margin-block: 19px;
-    border-radius: 14px;
     padding: 15px;
   }
 
@@ -180,18 +128,6 @@
     font-weight: 500;
   }
 
-  .message-text {
-    line-height: 1.4;
-  }
-
-  .chat-ctrls {
-    background: rgb(40, 40, 40);
-    margin-top: 6px;
-    border-radius: 14px;
-    display: flex;
-    justify-content: center;
-  }
-
   .chat-ctrls button {
     border: none;
     background: linear-gradient(45deg, var(--acc1), var(--acc2));
@@ -202,15 +138,6 @@
     font-size: 1rem;
     cursor: pointer;
     transition: .3s;
-  }
-
-  .chat-ctrls button:hover {
-    filter: contrast(3);
-  }
-
-  .poop-bg {
-    max-height: 70px;
-    width: auto;
   }
 
   #desktop {
@@ -248,36 +175,12 @@
     border-radius: 50%;
     width: auto;
   }
-
-  .input-pfp-btn {
-    border: none;
-    background: transparent;
-    display: flex;
-    align-items: center;
-    margin-inline: 7px;
-  }
-
-  .input-pfp-img {
-    max-height: 2rem;
-    border-radius: 50%;
-    width: auto;
-  }
-
-  .input-wrp {
-    width: 100%;
-    border: 1px var(--acc1) solid;
-    border-radius: 14px 0 0 14px;
-    display: flex;
-  }
-}
-
-.chat {
-  z-index: 10;
 }
 
 .messages-wrp {
   overflow-y: scroll;
   border-radius: 14px;
+  background: rgb(40, 40, 40);
 }
 
 .messages-wrp::-webkit-scrollbar {
@@ -447,6 +350,7 @@
 
 .message-text {
   word-wrap: break-word;
+  line-height: 1.4;
 }
 
 .no-messages {
@@ -473,4 +377,67 @@
   font-size: 1rem;
   outline: none;
   transition: .2s;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.3;
+}
+
+.input-wrp {
+  width: 100%;
+  border: 1px var(--acc1) solid;
+  display: flex;
+}
+
+.input-wrp-cant-send {
+  border-radius: 14px;
+}
+
+.input-wrp-can-send {
+  border-radius: 14px 0 0 14px;
+}
+
+.message {
+  margin-block: 19px;
+  border-radius: 14px;
+}
+
+.chat-ctrls {
+  background: rgb(40, 40, 40);
+  margin-top: 6px;
+  border-radius: 14px;
+  display: flex;
+  justify-content: center;
+}
+
+.chat-ctrls button:hover {
+  filter: contrast(3);
+}
+
+.input-pfp-btn {
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  margin-inline: 7px;
+}
+
+.input-pfp-img {
+  max-height: 2rem;
+  border-radius: 50%;
+  width: auto;
+}
+
+.msg-error {
+  position: fixed;
+  padding: 15px 30px;
+  color: white;
+  border: 1px red solid;
+  border-radius: 14px;
+  top: 20px;
+  max-width: 90%;
+  z-index: 11;
+  background: rgb(41, 21, 21);
+  transition: .8s;
 }

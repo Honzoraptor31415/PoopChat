@@ -8,19 +8,32 @@ function Chat() {
   const [message, setMessage] = useState("")
   const [user, setUser] = useState()
   const [messages, setMessages] = useState()
+  const [msgError, setMsgError] = useState()
+  const [meFadeAway, setMeFadeAway] = useState(false)
 
   async function send() {
-    const { error } = await supabase
-      .from('messages')
-      .insert({
-        sentBy: user.user_metadata.name,
-        sentByEmail: user.email,
-        pfpUrl: user.user_metadata.avatar_url,
-        text: message,
-        userid: user.id,
-        timestamp: new Date().getTime()
-      })
-    console.log(error)
+    if (message.length <= 400) {
+      const { error } = await supabase
+        .from('messages')
+        .insert({
+          sentBy: user.user_metadata.name,
+          sentByEmail: user.email,
+          pfpUrl: user.user_metadata.avatar_url,
+          text: message,
+          userid: user.id,
+          timestamp: new Date().getTime()
+        })
+      console.log(error)
+    } else {
+      setMeFadeAway()
+      setMsgError("Message is tooooo long.")
+      setTimeout(() => {
+        setMeFadeAway(true)
+      }, 1800)
+      setTimeout(() => {
+        setMsgError("")
+      }, 2000)
+    }
   }
 
   function scrollToBottom() {
@@ -50,18 +63,24 @@ function Chat() {
 
   supabase.channel('messages').on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages' }, handleInserts).subscribe()
 
+  async function deleteOldMessages() {
+    const { error } = await supabase.from('messages').delete().lt("timestamp", new Date().getTime() - 36_000_000)
+    console.log(error)
+  }
+
+  const checkEmptyMessage = msg => !msg.replace(/\s/g, '').length
+
   useEffect(() => {
     getData()
     getUser()
+    deleteOldMessages()
   }, [])
 
   return (
     <>
       <Nav />
+      {msgError ? <p className="msg-error" style={meFadeAway ? { right: "-100vw" } : {}} >{msgError}</p> : ""}
       <div className="container">
-        <svg className="no-select poop-bg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
-          <path fill="grey" d="M82 64H14a8 8 0 0 0 0 16h68a8 8 0 0 0 0-16zm-60-4h52a8 8 0 0 0 0-16H22a8 8 0 0 0 0 16zm8-20h36a5.971 5.971 0 0 0 6-5.877c.027-5.873-1.848-11.145-5.145-14.457A12.238 12.238 0 0 0 58 16a1.999 1.999 0 0 0-2 2v2a8.01 8.01 0 0 1-8 8H30a6 6 0 0 0 0 12z" />
-        </svg>
         <div id="chat" className="chat">
           <div className="messages-wrp">
             {messages ? (
@@ -83,18 +102,15 @@ function Chat() {
             ) : ""}
           </div>
           <div className="chat-ctrls">
-            <div className="input-wrp">
+            <div className={`input-wrp ${checkEmptyMessage(message) ? "input-wrp-cant-send" : "input-wrp-can-send"}`}>
               <div className="input-pfp-btn">
                 <img className="input-pfp-img no-select" src={user ? user.user_metadata.avatar_url : ""} />
               </div>
               <input id="message-input" placeholder={inputPlaceholders[Math.floor(Math.random() * inputPlaceholders.length)]} type="text" onChange={(e) => { setMessage(e.target.value) }} value={message} />
             </div>
-            <button onClick={send}>Submit</button>
+            {checkEmptyMessage(message) ? "" : <button onClick={send}>Submit</button>}
           </div>
         </div>
-        <svg className="no-select poop-bg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
-          <path fill="grey" d="M82 64H14a8 8 0 0 0 0 16h68a8 8 0 0 0 0-16zm-60-4h52a8 8 0 0 0 0-16H22a8 8 0 0 0 0 16zm8-20h36a5.971 5.971 0 0 0 6-5.877c.027-5.873-1.848-11.145-5.145-14.457A12.238 12.238 0 0 0 58 16a1.999 1.999 0 0 0-2 2v2a8.01 8.01 0 0 1-8 8H30a6 6 0 0 0 0 12z" />
-        </svg>
       </div>
     </>
   )
