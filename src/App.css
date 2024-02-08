@@ -39,8 +39,7 @@
     margin-right: 10px;
   }
 
-  .message-someone .message-text,
-  .message-someone .message-username {
+  .message-someone * {
     color: black;
   }
 
@@ -57,8 +56,9 @@
   .message-top {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
     margin-bottom: 20px;
+    flex-wrap: wrap;
   }
 
   .message-top img {
@@ -137,8 +137,7 @@
     margin-right: 20px;
   }
 
-  .message-someone .message-text,
-  .message-someone .message-username {
+  .message-someone * {
     color: black;
   }
 
@@ -155,7 +154,7 @@
   .message-top {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 10px;
     margin-bottom: 20px;
   }
 
@@ -576,4 +575,16 @@ p a:hover {
 .arrow {
   font-size: 1.3rem;
   color: inherit;
+}
+
+.message-date {
+  font-size: .8rem;
+  opacity: .8;
+  font-weight: 500;
+}
+
+.message-user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
