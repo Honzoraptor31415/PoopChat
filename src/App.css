@@ -440,3 +440,47 @@
 .chat-ctrls input[type=submit] {
   max-width: fit-content;
 }
+
+.error-wrp {
+  min-height: 100svh;
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.ets-wrp {
+  background: rgb(12, 12, 12);
+  padding: 30px 40px;
+  text-align: center;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.ep-text {
+  color: white;
+  font-size: 1.4rem;
+}
+
+.epd-text {
+  color: grey;
+  font-size: 1.2rem;
+}
+
+.back-to-home-yeeeet {
+  font-size: .9rem;
+  color: var(--acc2);
+  text-decoration: none;
+}
+
+.back-to-home-yeeeet:hover {
+  text-decoration: underline;
+}
+
+.about-section {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
