@@ -39,6 +39,11 @@
     margin-right: 10px;
   }
 
+  .message-someone .message-text,
+  .message-someone .message-username {
+    color: black;
+  }
+
   .message-me {
     background: linear-gradient(20deg, var(--acc1), var(--acc2));
     margin-left: 10px;
@@ -128,7 +133,13 @@
 
   .message-someone {
     background: white;
+    color: black;
     margin-right: 20px;
+  }
+
+  .message-someone .message-text,
+  .message-someone .message-username {
+    color: black;
   }
 
   .message-me {
