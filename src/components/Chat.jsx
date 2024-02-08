@@ -86,7 +86,9 @@ function Chat() {
               </>
             ) : ""}
           </div>
-          <a href="/about" className="about-link">About PoopChat <span className="arrow">→</span></a>
+          <div className="about-link-wrp">
+            <a href="/about" className="about-link">About PoopChat <span className="arrow">→</span></a>
+          </div>
           <form onSubmit={(e) => {
             e.preventDefault()
             send()

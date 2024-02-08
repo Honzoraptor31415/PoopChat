@@ -546,9 +546,13 @@ p a:hover {
   opacity: .9;
 }
 
+.about-link-wrp {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .about-link {
   color: grey;
-  text-align: right;
   text-decoration: none;
   font-size: 0.8rem;
   font-style: italic;
