@@ -14,7 +14,7 @@ function Nav() {
   }, [])
   return (
     <>
-      <nav id="desktop">
+      <nav id="desktop" className={location.pathname === "/about" || location.pathname === "/about/" ? "fixed-nav" : ""}>
         <a href="/" className="no-select logo-text">PoopChat!</a>
         <div className="user-info">
           <img src={user ? user.user_metadata.avatar_url : ""} className="pfp" />

@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react"
 import { supabase } from "../supabaseClient"
 import Message from "./Message"
-import Nav from "./Nav"
 
 function Chat() {
   const inputPlaceholders = ["Feel free to start typing", "You can type here", "Write your message", "Your message goes here!", "May you pls start typing?", "Write something", "Bing chilling", "Start typing..."]
@@ -35,14 +34,6 @@ function Chat() {
     }
   }
 
-  function scrollToBottom() {
-    const msgTimestamps = []
-    for (let i = 0; i < messages.length; i++) {
-      msgTimestamps.push(messages[i].timestamp)
-    }
-    document.getElementById(Math.max(...msgTimestamps)).scrollIntoView()
-  }
-
   async function getData() {
     const res = await supabase.from('messages').select("*").gt("timestamp", new Date().getTime() - 36_000_000)
     setMessages(res.data)
@@ -73,7 +64,6 @@ function Chat() {
 
   return (
     <>
-      <Nav />
       {msgError ? <p className="msg-error" style={meFadeAway ? { right: "-100vw" } : {}} >{msgError}</p> : ""}
       <div className="container">
         <div id="chat" className="chat">
@@ -96,6 +86,7 @@ function Chat() {
               </>
             ) : ""}
           </div>
+          <a href="/about" className="about-link">About PoopChat <span className="arrow">→</span></a>
           <form onSubmit={(e) => {
             e.preventDefault()
             send()
