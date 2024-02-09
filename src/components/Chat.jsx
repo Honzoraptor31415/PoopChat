@@ -9,6 +9,7 @@ function Chat() {
   const [messages, setMessages] = useState()
   const [msgError, setMsgError] = useState()
   const [meFadeAway, setMeFadeAway] = useState(false)
+  const oldestMessageTime = 172_800_000
 
   async function send() {
     if (message.length <= 400) {
@@ -35,7 +36,7 @@ function Chat() {
   }
 
   async function getData() {
-    const res = await supabase.from('messages').select("*").gt("timestamp", new Date().getTime() - 36_000_000)
+    const res = await supabase.from('messages').select("*").gt("timestamp", new Date().getTime() - oldestMessageTime)
     setMessages(res.data)
   }
 
@@ -51,7 +52,7 @@ function Chat() {
   supabase.channel('messages').on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages' }, handleInserts).subscribe()
 
   async function deleteOldMessages() {
-    const { error } = await supabase.from('messages').delete().lt("timestamp", new Date().getTime() - 36_000_000)
+    const { error } = await supabase.from('messages').delete().lt("timestamp", new Date().getTime() - oldestMessageTime)
   }
 
   const checkEmptyMessage = msg => !msg.replace(/\s/g, '').length
@@ -80,7 +81,7 @@ function Chat() {
                   </>
                 ) : (
                   <div className="no-messages">
-                    <p className="no-messages-text no-select">No messages were sent in the past 10 hours.</p>
+                    <p className="no-messages-text no-select">No messages were sent in the past 48 hours.</p>
                   </div>
                 )}
               </>
