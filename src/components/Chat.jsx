@@ -91,7 +91,7 @@ function Chat() {
     <>
       {poopStatus ? (
         <>
-          {poopStatus.lastGotPooped > new Date().getTime() - 43_200_000 ? (
+          {poopStatus.lastGotPooped > new Date().getTime() - 7_200_000 ? (
             <>
               <h1>You got pooped</h1>
             </>
