@@ -11,29 +11,47 @@ function Chat() {
   const [meFadeAway, setMeFadeAway] = useState(false)
   const [poopStatus, setPoopStatus] = useState()
   const [randomPlaceholder, setRandomPlaceholder] = useState(inputPlaceholders[Math.floor(Math.random() * inputPlaceholders.length)])
+  const [lastSent, setLastSent] = useState()
+  const [timerAnimation, setTimerAnimation] = useState()
   const oldestMessageTime = 172_800_000
 
   async function send() {
-    if (message.length <= 400) {
-      const { error } = await supabase
-        .from('messages')
-        .insert({
-          sentBy: user.user_metadata.name,
-          sentByEmail: user.email,
-          pfpUrl: user.user_metadata.avatar_url,
-          text: message,
-          userid: user.id,
-          timestamp: new Date().getTime()
-        })
+    if (lastSent) {
+      console.log("Go slower")
+      setLastSent(true)
+      setTimeout(() => {
+        setLastSent(false)
+      }, 5000)
+      setTimerAnimation(true)
+      setTimeout(() => {
+        setTimerAnimation(false)
+      }, 800)
     } else {
-      setMeFadeAway()
-      setMsgError("Message is tooooo long.")
-      setTimeout(() => {
-        setMeFadeAway(true)
-      }, 1800)
-      setTimeout(() => {
-        setMsgError("")
-      }, 2000)
+      if (message.length <= 400) {
+        setLastSent(true)
+        setTimeout(() => {
+          setLastSent(false)
+        }, 5000)
+        const { error } = await supabase
+          .from('messages')
+          .insert({
+            sentBy: user.user_metadata.name,
+            sentByEmail: user.email,
+            pfpUrl: user.user_metadata.avatar_url,
+            text: message,
+            userid: user.id,
+            timestamp: new Date().getTime()
+          })
+      } else {
+        setMeFadeAway()
+        setMsgError("Message is tooooo long.")
+        setTimeout(() => {
+          setMeFadeAway(true)
+        }, 1800)
+        setTimeout(() => {
+          setMsgError("")
+        }, 2000)
+      }
     }
   }
 
@@ -60,11 +78,9 @@ function Chat() {
   async function createUserInDB(u) {
     const { data, error } = await supabase.from("users").select("*").eq("userEmail", u.email)
     if (data.length > 0) {
-      // user in database already exists
       console.log("User already exists in the DB")
       setPoopStatus(data[0])
     } else {
-      // user doesn't exist in the database
       const { error } = await supabase.from("users").insert({ lastGotPooped: null, lastPoopedSomeone: null, userEmail: u.email })
     }
   }
@@ -138,6 +154,7 @@ function Chat() {
                           <img className="input-pfp-img no-select" src={user ? user.user_metadata.avatar_url : ""} />
                         </div>
                         <input id="message-input" placeholder={randomPlaceholder} type="text" onChange={(e) => { setMessage(e.target.value) }} value={message} />
+                        {lastSent ? <img src="timer-icon.svg" className={`timer ${timerAnimation ? "timer-shake" : ""}`} /> : ""}
                       </div>
                       {checkEmptyMessage(message) ? "" : <input type="submit" value={"Submit"} />}
                     </form>

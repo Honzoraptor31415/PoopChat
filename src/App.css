@@ -1,7 +1,6 @@
 :root {
   --acc1: #5A4650;
   --acc2: #7D5046;
-  --poop-outline-width: 3;
 }
 
 * {
@@ -438,6 +437,7 @@
   width: 100%;
   border: 1px var(--acc1) solid;
   display: flex;
+  align-items: center;
 }
 
 .input-wrp-cant-send {
@@ -610,4 +610,37 @@ p a:hover {
 
 .poop-btn:hover {
   filter: contrast(2);
+}
+
+#root:has(h1) nav {
+  display: none;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: .8;
+  pointer-events: none;
+}
+
+.timer {
+  max-height: 2rem;
+  width: auto;
+  display: grid;
+  margin-inline: 7px;
+}
+
+.timer-shake {
+  animation: timer-warning .8s;
+}
+
+@keyframes timer-warning {
+  25% {
+    filter: brightness(10);
+    transform: scale(1.2);
+    rotate: 10deg;
+  }
+
+  75% {
+    rotate: -10deg;
+  }
 }
