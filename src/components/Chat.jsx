@@ -17,7 +17,6 @@ function Chat() {
 
   async function send() {
     if (lastSent) {
-      console.log("Go slower")
       setLastSent(true)
       setTimeout(() => {
         setLastSent(false)
@@ -67,7 +66,6 @@ function Chat() {
   }
 
   const hanldePooped = (payload) => {
-    console.log(payload)
     if (payload.new.userEmail === user.email) {
       setPoopStatus(payload.new)
     }
@@ -78,7 +76,6 @@ function Chat() {
   async function createUserInDB(u) {
     const { data, error } = await supabase.from("users").select("*").eq("userEmail", u.email)
     if (data.length > 0) {
-      console.log("User already exists in the DB")
       setPoopStatus(data[0])
     } else {
       const { error } = await supabase.from("users").insert({ lastGotPooped: null, lastPoopedSomeone: null, userEmail: u.email })

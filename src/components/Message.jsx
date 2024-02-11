@@ -12,7 +12,6 @@ function Message({ sentBy, timestamp, text, pfpUrl, sentByEmail, userLastPooped 
   async function poop(u) {
     const { error } = await supabase.from("users").update({ lastGotPooped: new Date().getTime() }).eq("userEmail", sentByEmail)
     setPooped(u)
-    console.log(`You pooped ${u}`)
   }
 
   useEffect(() => {
