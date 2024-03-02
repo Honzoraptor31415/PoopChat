@@ -88,10 +88,6 @@
     display: none;
   }
 
-  #root:has(.fixed-nav) {
-    padding-top: 90px;
-  }
-
   .about-section {
     background: rgb(30, 30, 30);
     max-width: 95%;
@@ -202,10 +198,6 @@
 
   .user-info {
     display: grid;
-  }
-
-  #root:has(.fixed-nav) {
-    padding-top: 90px;
   }
 
   .about-section {
@@ -647,4 +639,8 @@ button:disabled {
 
 .about-section h2:nth-of-type(even) {
   margin-top: 16px;
+}
+
+#root:has(.fixed-nav) {
+  padding-top: 120px;
 }
