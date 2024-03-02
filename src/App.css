@@ -98,7 +98,7 @@
     height: fit-content;
     padding: 20px;
     border-radius: 28px;
-    gap: 30px;
+    gap: 20px;
     display: flex;
     flex-direction: column;
   }
@@ -214,7 +214,7 @@
     height: fit-content;
     padding: 30px;
     border-radius: 28px;
-    gap: 30px;
+    gap: 20px;
     display: flex;
     flex-direction: column;
   }
@@ -643,4 +643,8 @@ button:disabled {
   75% {
     rotate: -10deg;
   }
+}
+
+.about-section h2:nth-of-type(even) {
+  margin-top: 16px;
 }
