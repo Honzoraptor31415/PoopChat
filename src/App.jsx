@@ -19,7 +19,7 @@ function App() {
 
   return (
     <>
-      {user ? <Nav /> : ""}
+      {user && <Nav />}
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />

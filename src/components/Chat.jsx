@@ -102,7 +102,7 @@ function Chat() {
 
   return (
     <>
-      {poopStatus ? (
+      {poopStatus && (
         <>
           {poopStatus.lastGotPooped > new Date().getTime() - 7_200_000 ? (
             <>
@@ -111,15 +111,15 @@ function Chat() {
           ) : (
             <>
               <>
-                {msgError ? <p className="msg-error" style={meFadeAway ? { right: "-100vw" } : {}} >{msgError}</p> : ""}
+                {msgError && <p className="msg-error" style={meFadeAway && { right: "-100vw" }} >{msgError}</p>}
                 <div className="container">
                   <div id="chat" className="chat">
                     <div className="messages-wrp">
-                      {messages ? (
+                      {messages && (
                         <>
                           {messages.length > 0 ? (
                             <>
-                              {poopStatus ? (
+                              {poopStatus && (
                                 <>
                                   {messages.map(value => {
                                     return (
@@ -127,7 +127,7 @@ function Chat() {
                                     )
                                   })}
                                 </>
-                              ) : ""}
+                              )}
                             </>
                           ) : (
                             <div className="no-messages">
@@ -135,7 +135,7 @@ function Chat() {
                             </div>
                           )}
                         </>
-                      ) : ""}
+                      )}
                     </div>
                     <div className="about-link-wrp">
                       <a href="/about" className="about-link">About PoopChat <span className="arrow">→</span></a>
@@ -148,12 +148,12 @@ function Chat() {
                     }} className="chat-ctrls">
                       <div className={`input-wrp ${checkEmptyMessage(message) ? "input-wrp-cant-send" : "input-wrp-can-send"}`}>
                         <div className="input-pfp-btn">
-                          <img className="input-pfp-img no-select" src={user ? user.user_metadata.avatar_url : ""} />
+                          <img className="input-pfp-img no-select" src={user && user.user_metadata.avatar_url} />
                         </div>
                         <input id="message-input" placeholder={randomPlaceholder} type="text" onChange={(e) => { setMessage(e.target.value) }} value={message} />
-                        {lastSent ? <img src="timer-icon.svg" className={`timer ${timerAnimation ? "timer-shake" : ""}`} /> : ""}
+                        {lastSent && <img src="timer-icon.svg" className={`timer ${timerAnimation ? "timer-shake" : ""}`} />}
                       </div>
-                      {checkEmptyMessage(message) ? "" : <input type="submit" value={"Submit"} />}
+                      {!checkEmptyMessage(message) && <input type="submit" value={"Submit"} />}
                     </form>
                   </div>
                 </div>
@@ -161,7 +161,7 @@ function Chat() {
             </>
           )}
         </>
-      ) : ""}
+      )}
     </>
   )
 }

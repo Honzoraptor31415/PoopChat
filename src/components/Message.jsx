@@ -28,11 +28,11 @@ function Message({ sentBy, timestamp, text, pfpUrl, sentByEmail, userLastPooped 
             <p className="message-username">{sentBy}</p>
           </div>
           <p className="message-date">{`${new Date(timestamp).toLocaleDateString("de-DE")} ${new Date(timestamp).getHours()}:${new Date(timestamp).getMinutes()}`}</p>
-          {user ? (
+          {user && (
             <>
-              {sentByEmail === user.email ? "" : <button disabled={pooped ? true : false} onClick={() => { poop(sentBy) }} className="poop-btn">{pooped ? `${pooped.length <= 9 ? `You pooped ${pooped}` : "You pooped this user"}` : <>{sentBy.length <= 9 ? `Poop ${sentBy}` : "Poop this user"}</>} </button>}
+              {sentByEmail === user.email ? "" : <button disabled={pooped && true} onClick={() => { poop(sentBy) }} className="poop-btn">{pooped ? `${pooped.length <= 9 ? `You pooped ${pooped}` : "You pooped this user"}` : <>{sentBy.length <= 9 ? `Poop ${sentBy}` : "Poop this user"}</>} </button>}
             </>
-          ) : ""}
+          )}
         </div>
         <p className="message-text">{text}</p>
       </div>
