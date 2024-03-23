@@ -16,17 +16,15 @@ function Chat() {
   const oldestMessageTime = 172_800_000
 
   async function send() {
+    setMessage(message.trim())
     if (lastSent) {
-      setLastSent(true)
-      setTimeout(() => {
-        setLastSent(false)
-      }, 5000)
-      setTimerAnimation(true)
-      setTimeout(() => {
-        setTimerAnimation(false)
-      }, 800)
+      timerChecker()
     } else {
-      if (message.length <= 400) {
+      if (message.length >= 400) {
+        errorMessage("Message is too long")
+      } else if (checkEmptyMessage(message)) {
+        errorMessage("Message can't be empty")
+      } else {
         setLastSent(true)
         setTimeout(() => {
           setLastSent(false)
@@ -41,17 +39,30 @@ function Chat() {
             userid: user.id,
             timestamp: new Date().getTime()
           })
-      } else {
-        setMeFadeAway()
-        setMsgError("Message is tooooo long.")
-        setTimeout(() => {
-          setMeFadeAway(true)
-        }, 1800)
-        setTimeout(() => {
-          setMsgError("")
-        }, 2000)
       }
     }
+  }
+
+  function timerChecker() {
+    setLastSent(true)
+    setTimeout(() => {
+      setLastSent(false)
+    }, 5000)
+    setTimerAnimation(true)
+    setTimeout(() => {
+      setTimerAnimation(false)
+    }, 800)
+  }
+
+  function errorMessage(message) {
+    setMeFadeAway()
+    setMsgError(message)
+    setTimeout(() => {
+      setMeFadeAway(true)
+    }, 2500)
+    setTimeout(() => {
+      setMsgError("")
+    }, 3100)
   }
 
   async function getData() {
@@ -111,7 +122,7 @@ function Chat() {
           ) : (
             <>
               <>
-                {msgError && <p className="msg-error" style={meFadeAway && { right: "-100vw" }} >{msgError}</p>}
+                {msgError && <p className={`msg-error ${meFadeAway ? "msg-error-hide" : ""}`} >{msgError}</p>}
                 <div className="container">
                   <div id="chat" className="chat">
                     <div className="messages-wrp">

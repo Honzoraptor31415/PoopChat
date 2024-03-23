@@ -377,7 +377,12 @@ img.no-select {
   max-width: 90%;
   z-index: 11;
   background: rgb(41, 21, 21);
-  transition: .8s;
+  transition: .6s;
+}
+
+.msg-error-hide {
+  margin-right: -100vw;
+  opacity: 0;
 }
 
 .chat-ctrls input[type=submit] {
