@@ -546,3 +546,7 @@ button:disabled {
     margin-top: 30px;
   }
 }
+
+body:has(.error-wrp) nav {
+  display: none;
+}
