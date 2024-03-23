@@ -548,5 +548,5 @@ button:disabled {
 }
 
 body:has(.error-wrp) nav {
-  display: none;
+  display: none !important;
 }
