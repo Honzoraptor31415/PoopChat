@@ -537,10 +537,12 @@ button:disabled {
   margin-top: 16px;
 }
 
-.about-section {
-  margin-top: 30px;
-}
-
 #root:has(.fixed-nav) {
   padding-top: 88px;
+}
+
+@media (max-width: 800px) {
+  .about-section {
+    margin-top: 30px;
+  }
 }
