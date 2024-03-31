@@ -7,7 +7,7 @@ function Home() {
 
   async function getUser() {
     const { data: { user } } = await supabase.auth.getUser()
-    setUser(user)
+    user ? setUser(user) : setUser(null)
   }
 
   async function googleSignIn() {
@@ -24,11 +24,15 @@ function Home() {
     <>
       {user ? <Chat /> : (
         <>
-          <p className="log-in-please">If you want to join the chat room, you have to be signed in.</p>
-          <button onClick={googleSignIn} className="google-signin">
-            <img src="./google-icon.svg" />
-            <span>Sign in with google</span>
-          </button>
+          {user === null && (
+            <>
+              <p className="log-in-please">If you want to join the chat room, you have to be signed in.</p>
+              <button onClick={googleSignIn} className="google-signin">
+                <img src="./google-icon.svg" />
+                <span>Sign in with google</span>
+              </button>
+            </>
+          )}
         </>
       )}
     </>

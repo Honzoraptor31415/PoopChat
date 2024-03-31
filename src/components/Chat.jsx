@@ -14,6 +14,7 @@ function Chat() {
   const [lastSent, setLastSent] = useState()
   const [timerAnimation, setTimerAnimation] = useState()
   const oldestMessageTime = 172_800_000
+  const [loading, setLoading] = useState(true)
 
   async function send() {
     setMessage(message.trim())
@@ -68,6 +69,7 @@ function Chat() {
   async function getData() {
     const res = await supabase.from('messages').select("*").gt("timestamp", new Date().getTime() - oldestMessageTime)
     setMessages(res.data)
+    setLoading(false)
   }
 
   async function getUser() {
@@ -113,62 +115,66 @@ function Chat() {
 
   return (
     <>
-      {poopStatus && (
+      {loading ? (<div className="loading-wrp"><div className="lds-ring"><div></div><div></div><div></div><div></div></div></div>) : (
         <>
-          {poopStatus.lastGotPooped > new Date().getTime() - 7_200_000 ? (
+          {poopStatus && (
             <>
-              <h1>You got pooped</h1>
-            </>
-          ) : (
-            <>
-              <>
-                {msgError && <p className={`msg-error ${meFadeAway ? "msg-error-hide" : ""}`} >{msgError}</p>}
-                <div className="container">
-                  <div id="chat" className="chat">
-                    <div className="messages-wrp">
-                      {messages && (
-                        <>
-                          {messages.length > 0 ? (
+              {poopStatus.lastGotPooped > new Date().getTime() - 7_200_000 ? (
+                <>
+                  <h1>You got pooped</h1>
+                </>
+              ) : (
+                <>
+                  <>
+                    {msgError && <p className={`msg-error ${meFadeAway ? "msg-error-hide" : ""}`} >{msgError}</p>}
+                    <div className="container">
+                      <div id="chat" className="chat">
+                        <div className="messages-wrp">
+                          {messages && (
                             <>
-                              {poopStatus && (
+                              {messages.length > 0 ? (
                                 <>
-                                  {messages.map(value => {
-                                    return (
-                                      <Message key={value.id} text={value.text} sentBy={value.sentBy} timestamp={value.timestamp} pfpUrl={value.pfpUrl} sentByEmail={value.sentByEmail} userLastPooped={poopStatus} />
-                                    )
-                                  })}
+                                  {poopStatus && (
+                                    <>
+                                      {messages.map(value => {
+                                        return (
+                                          <Message key={value.id} text={value.text} sentBy={value.sentBy} timestamp={value.timestamp} pfpUrl={value.pfpUrl} sentByEmail={value.sentByEmail} userLastPooped={poopStatus} />
+                                        )
+                                      })}
+                                    </>
+                                  )}
                                 </>
+                              ) : (
+                                <div className="no-messages">
+                                  <p className="no-messages-text no-select">No messages were sent in the past 48 hours.</p>
+                                </div>
                               )}
                             </>
-                          ) : (
-                            <div className="no-messages">
-                              <p className="no-messages-text no-select">No messages were sent in the past 48 hours.</p>
-                            </div>
                           )}
-                        </>
-                      )}
-                    </div>
-                    <div className="about-link-wrp">
-                      <a href="/about" className="about-link">About PoopChat <span className="arrow">→</span></a>
-                    </div>
-                    <form onSubmit={(e) => {
-                      e.preventDefault()
-                      send()
-                      setRandomPlaceholder(inputPlaceholders[Math.floor(Math.random() * inputPlaceholders.length)])
-                      setMessage("")
-                    }} className="chat-ctrls">
-                      <div className={`input-wrp ${checkEmptyMessage(message) ? "input-wrp-cant-send" : "input-wrp-can-send"}`}>
-                        <div className="input-pfp-btn">
-                          <img className="input-pfp-img no-select" src={user && user.user_metadata.avatar_url} />
                         </div>
-                        <input id="message-input" placeholder={randomPlaceholder} type="text" onChange={(e) => { setMessage(e.target.value) }} value={message} />
-                        {lastSent && <img src="timer-icon.svg" className={`timer ${timerAnimation ? "timer-shake" : ""}`} />}
+                        <div className="about-link-wrp">
+                          <a href="/about" className="about-link">About PoopChat <span className="arrow">→</span></a>
+                        </div>
+                        <form onSubmit={(e) => {
+                          e.preventDefault()
+                          send()
+                          setRandomPlaceholder(inputPlaceholders[Math.floor(Math.random() * inputPlaceholders.length)])
+                          setMessage("")
+                        }} className="chat-ctrls">
+                          <div className={`input-wrp ${checkEmptyMessage(message) ? "input-wrp-cant-send" : "input-wrp-can-send"}`}>
+                            <div className="input-pfp-btn">
+                              <img className="input-pfp-img no-select" src={user && user.user_metadata.avatar_url} />
+                            </div>
+                            <input id="message-input" placeholder={randomPlaceholder} type="text" onChange={(e) => { setMessage(e.target.value) }} value={message} />
+                            {lastSent && <img src="timer-icon.svg" className={`timer ${timerAnimation ? "timer-shake" : ""}`} />}
+                          </div>
+                          {!checkEmptyMessage(message) && <input type="submit" value={"Submit"} />}
+                        </form>
                       </div>
-                      {!checkEmptyMessage(message) && <input type="submit" value={"Submit"} />}
-                    </form>
-                  </div>
-                </div>
-              </>
+                    </div>
+                  </>
+                </>
+              )}
             </>
           )}
         </>
