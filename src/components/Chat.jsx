@@ -112,7 +112,6 @@ function Chat() {
       .from("users")
       .select("*")
       .eq("userEmail", u.email);
-    console.log(data, u.email, u);
     if (data.length > 0) {
       setPoopStatus(data[0]);
     } else {
@@ -126,7 +125,6 @@ function Chat() {
 
   const handleInserts = (payload) => {
     setMessages((prevMessages) => [...prevMessages, payload.new]);
-    console.log("Message recieved");
   };
 
   supabase
